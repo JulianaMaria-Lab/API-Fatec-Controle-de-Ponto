@@ -1,0 +1,107 @@
+/* pagina de controle de presença  */
+
+/* titulo */
+.titulo {
+  font-weight: bold;
+  text-align: center;
+  font-size: 28px;
+
+  margin: 70px 0px 80px;
+}
+/* formulario */
+.txt,
+.number,
+#select-colaborador {
+  height: 35px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e1e1e1;
+  padding: 4px;
+}
+.number {
+  width: 150px;
+}
+#botao_cad {
+  width: 150px;
+  height: 30px;
+  background-color: #364e73;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #ffffff;
+  font-size: 12pt;
+  cursor: pointer;
+}
+.validar {
+  width: 180px;
+  height: 30px;
+  background-color: #364e73;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #ffffff;
+  font-size: 12pt;
+  cursor: pointer;
+}
+#botao_cad:hover {
+  background: #22334d;
+  box-shadow: #22334d;
+  text-shadow: none;
+}
+/* tabela do formulário */
+.bt-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0px 90px;
+}
+#tab_cadastro,
+.table {
+  display: flex;
+  justify-content: center;
+}
+
+/* //////////////////tabela //////////////////// */
+#evento {
+  border-collapse: collapse;
+}
+#evento th {
+  text-align: center;
+}
+.table table,
+.table td,
+.table th {
+  border: 1px solid #000;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 8px;
+}
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.table th,
+.dias td {
+  background-color: #2d4364;
+  color: white;
+}
+
+.sair {
+  padding: 10px 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+}
+
+.sair {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.sair:hover {
+  background-color: red;
+  color: white;
+}

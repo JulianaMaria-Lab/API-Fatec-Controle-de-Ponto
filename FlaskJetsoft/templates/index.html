@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home</title>
+	    <link rel="shortcut icon" href="./img/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/home.css') }}">
+        <script src="{{url_for('static', filename='script/script.js')}}" defer> </script>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="../static/img/logo.svg" alt="Logo">
+                <p>Logo</p>  
+            </div>
+            <div class="login">
+             
+                <div class="user">
+                    <p>{{session.username}}</p>
+                    <p class="user-perfil">{{session.nivel}}</p> 
+                </div>
+                <a href="{{url_for('logout')}}"><button class="sair">Sair</button></a>
+            </div>
+        </header>
+        <div class="container">
+            <div class="menu">
+                <nav>
+                    <a href="{{url_for('index')}}" id="select">Home</a>
+                    <button class="dropdown-btn"> <!--id select para o menu ficar setado na pagina que aparece -->
+                        Cadastro
+                        <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="{{url_for('cadastro_cliente')}}">Cliente</a>
+                        <a href="{{url_for('cadastro')}}">Colaborador</a> <!--id select para o menu ficar setado na pagina que aparece -->
+                        <a href="{{url_for('posto_trabalho')}}">Posto de trabalho</a>
+                        <a href="{{url_for('contrato')}}">Contratos</a>
+                    </div>
+                    <button class="dropdown-btn">
+                        Quadro de controle
+                        <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="{{url_for('quadro_cliente')}}">Quadro de clientes</a>
+                        <a href="{{url_for('quadro_colaborador')}}">Quadro de colaborador</a>
+                        <a href="{{url_for('postos_trabalho')}}">Posto de trabalho</a>
+                    </div>
+                        <a href="{{url_for('controle')}}">Controle de Presença</a>
+                        <a href="{{url_for('evento')}}">Eventos</a>
+                        <a href="{{url_for('quadro_contrato')}}">Contratos</a>
+                        <a href="{{url_for('presenca_tatico')}}">Autorização</a>
+                    <a href="{{url_for('cadastro_usuario')}}">Cadastro de Usuario</a>
+                </nav>
+            </div>
+        <section>
+            <div class="btn-information">
+                <div class="clientes">
+                    <p class="valor">{{numeroCliente.0.0}}</p>
+                    <p>Clientes</p>
+                </div>
+                <div class="postos">
+                    <p class="valor">{{numeroPostos.0.0}}</p>
+                    <p>Posto de Trabalho</p>
+                </div>
+                <div class="colaboradores">
+                    <p class="valor">{{numeroColaboradores.0.0}}</p>
+                    <p>Colaboradores</p>
+                </div>
+            </div>
+            <div class="charts">
+                <div class="chart-clientes">
+                    <h1 class="titulo">Clientes Recentes</h1>
+                    <div id="quadro_cliente"> 
+                        <div class="table">
+                            <table>
+                            <tr id="cliente">
+                                <th class="colab tab" >Cliente</th>
+                                <th  class="colab tab" >CNPJ</th>
+                                <th  class="colab tab" >E-mail</th>
+                                <th class="colab tab" >Contato</th>
+                                <th class="colab tab" >Data de Admissão</th>
+                            </tr>
+                            {%for row in quadro_cliente %}  
+                            <tr class="dados">
+                                <td  class="colab tab">{{row.2}}</td>
+                                <td  class="colab tab">{{row.3}}</td>
+                                <td  class="colab tab">{{row.11}}</td>
+                                <td  class="colab tab">{{row.10}}</td>
+                                <td  class="colab tab">{{row.12}}</td>
+                            </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-postos">
+                    <h1 class="titulo">Postos de Trabalho Recentes</h1>
+                    <div id="postos_trabalhos"> 
+                        <div class="table">
+                            <table>
+                            <tr id="parte1">
+                                <th class="colab tab">Postos de trabalho</th>
+                                <th  class="colab tab" >descrição</th>
+                                <th  class="colab tab" >Quantidade de colaborador</th>
+                                <th class="colab tab" >Escala</th>
+                                <th class="colab tab" >Contratos</th>
+                            </tr>
+                            {%for row in data %}  
+                            <tr class="dados">
+                                <td  class="colab tab">{{row.0}}</td>
+                                <td  class="colab tab">{{row.1}}</td>
+                                <td  class="colab tab">{{row.3}}</td>
+                                <td  class="colab tab">{{row.2}}</td>
+                                <td  class="colab tab">{{row.4}}</td>
+                            </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,106 @@
+.btn-information {
+  display: flex;
+  justify-content: space-around;
+  margin: 70px 0px 80px;
+}
+.clientes,
+.postos,
+.colaboradores {
+  border: 2px solid #000;
+  border-radius: 10px;
+
+  padding: 20px;
+
+  font-size: 24px;
+  text-align: center;
+
+  width: 300px;
+}
+.valor {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.charts {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+.charts p {
+  font-size: 24px;
+}
+.chart-clientes,
+.chart-postos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 30px;
+}
+
+.sair {
+  padding: 10px 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+}
+
+.sair {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.sair:hover {
+  background-color: red;
+  color: white;
+}
+
+.dados td {
+  padding: 5px;
+}
+#cliente {
+  border-collapse: collapse;
+}
+#postos_trabalhos {
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  text-align: left;
+  padding: 8px;
+  width: 7vw;
+}
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.table th {
+  background-color: #2d4364;
+  color: white;
+}
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.error img {
+  width: 60%;
+}
+.btn-back {
+  width: 180px;
+  height: 30px;
+  background-color: #364e73;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #ffffff;
+  font-size: 12pt;
+  cursor: pointer;
+}
+.error a {
+  text-decoration: none;
+  color: #ffffff;
+}

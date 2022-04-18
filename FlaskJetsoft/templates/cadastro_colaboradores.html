@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cadastro de Colaboradores</title>
+	    <link rel="shortcut icon" href="./img/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/styleCadastroColaborador.css') }}">
+        <script src="{{url_for('static', filename='script/script.js')}}" defer> </script>
+    </head>
+    <body>
+            <header>
+                <div class="logo">
+                    <img src="../static/img/logo.svg" alt="Logo">
+                    <p>Logo</p>  
+                </div>
+                <div class="login">
+                   
+                    <div class="user">
+                       <p>{{session.username}}</p>
+                       <p class="user-perfil">{{session.nivel}}</p> 
+                    </div>
+                    <a href="{{url_for('logout')}}"><button class="sair">Sair</button></a>
+                </div>
+            </header>
+            <div class="container">
+                <div class="menu">
+                    <nav>
+                        <a href="{{url_for('index')}}">Home</a>
+                        <button class="dropdown-btn" id="select"> <!--id select para o menu ficar setado na pagina que aparece -->
+                            Cadastro
+                            <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                        </button>
+                        <div class="dropdown-container">
+                            <a href="{{url_for('cadastro_cliente')}}">Cliente</a>
+                            <a href="{{url_for('cadastro')}}" id="select">Colaborador</a> <!--id select para o menu ficar setado na pagina que aparece -->
+                            <a href="{{url_for('posto_trabalho')}}">Posto de trabalho</a>
+                            <a href="{{url_for('contrato')}}">Contratos</a>
+                        </div>
+                        <button class="dropdown-btn">
+                            Quadro de controle
+                            <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                        </button>
+                        <div class="dropdown-container">
+                            <a href="{{url_for('quadro_cliente')}}">Quadro de clientes</a>
+                            <a href="{{url_for('quadro_colaborador')}}">Quadro de colaborador</a>
+                            <a href="{{url_for('postos_trabalho')}}">Posto de trabalho</a>
+                        </div>
+                        <a href="{{url_for('controle')}}">Controle de Presença</a>
+                        <a href="{{url_for('evento')}}">Eventos</a>
+                        <a href="{{url_for('quadro_contrato')}}">Contratos</a>
+                        <a href="{{url_for('presenca_tatico')}}">Autorização</a>
+                        <a href="{{url_for('cadastro_usuario')}}">Cadastro de Usuario</a>
+                    </nav>
+                </div>
+        
+                <section>
+                    <p class="titulo">Cadastro de Colaboradores</p>
+                    <div id="cadastro"> 
+
+                    <form name="colaborador" action="" method="POST">
+                        <table id="tab_cadastro" cellspacing="12">
+                        <tr>				
+                            <td>Nome Completo:</td>
+                            <td><input type="text" name="nome" id="nome" class="txt" required placeholder="Nome completo"/></td>
+                            <td>Data de Admissão:</td>
+                            <td><input type="date" name="admissao" id="admissao" class="date" required /></td>
+                        </tr>            	
+                        <tr>				
+                            <td>CPF:</td>
+                            <td><input type="text" name="cpf" id="cpf" class="num" required placeholder="xxx.xxx.xxx/xx"/></td>
+                            <td>E-mail:</td>
+                            <td><input type="email" name="email" id="email" class="txt" required placeholder="teste@teste.com"/></td>
+                        </tr>				
+                        <tr>
+                            <td>Matrícula:</td>
+                            <td><input type="text" name="matricula"  id="matricula" class="num" placeholder="Numero Matricula" required /></td>
+                            <td>Telefone:</td>
+                            <td><input type="text" name="telefone" id="telefone" class="num" required placeholder="(xx) xxxxx-xxxx" /></td>
+                        </tr>
+                        <tr>
+                            <td>Função:</td>
+                            <td><input type="text" name="funcao" id="funcao" class="txt" placeholder="Área atuação" required/></td>
+                            <td>Posto de Trabalho:</td>
+                            <td>
+                                <select id="select-posto" name="posto_trabalho">
+                                <option value=""></option>
+                                {%for row in posto_trabalho %}                             
+                                <option value="{{row.0}}">{{row.0}}</option>                                                               
+                                {% endfor %}                                  
+                            </select></td>
+                        </tr>   
+                        <tr>
+                            <td>Tipo de Cobertura:</td>
+                            <td>
+                                <div class="radio">
+                                    <label><input type="radio" name="devweb" value="fixo"/>&nbsp;Fixo&emsp;</label> <!--entidade que representa a tecla do espaço : &nbsp; (non-breaking space)-->
+                                    <label><input type="radio" name="devweb" value="flutuante"/>&nbsp;Flutuante</label>  <!--&emsp; representa 4 espaços-->
+                                </div>
+                            </td>	
+                        </tr> 
+                            				
+                        
+                        </table>
+                        <div class="bt-container">
+                            <!--essa parte é o codigo com flask para exibir a mensagem de confirmação de envio -->
+                            <button type="submit" class="cadastrar" id="botao_cad">Cadastrar</button>
+                            <div class="concluido">
+                                {%with messages = get_flashed_messages() %}
+
+                                {%if messages%}
+        
+                                {%for message in messages%}
+        
+                                {{message}}
+        
+                                {%endfor%}
+                                {%endif%}
+                                {%endwith%}
+                            </div>           
+                        </div>
+                    </form>
+                    </div>
+                </section>
+            </div>
+    </body>
+</html>

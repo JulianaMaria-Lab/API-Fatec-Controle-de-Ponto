@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Controle de Presença</title>
+	    <link rel="shortcut icon" href="./img/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/stylePresenca.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/print.css') }}">
+        <script src="{{ url_for('static', filename='script/script.js') }}" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="logo no-print">
+                <img src="../static/img/logo.svg" alt="Logo">
+                <p>Logo</p>  
+            </div>
+            <div class="login no-print">
+                
+                <div class="user">
+                   <p>{{session.username}}</p>
+                   <p class="user-perfil">{{session.nivel}}</p> 
+                </div>
+                <a href="{{url_for('logout')}}"><button class="sair no-print">Sair</button></a>
+            </div>
+        </header>
+        <div class="container">
+            <div class="menu no-print">
+                <nav>
+                    <a href="{{url_for('index')}}">Home</a>
+                     <button class="dropdown-btn"> <!--id select para o menu ficar setado na pagina que aparece no menu -->
+                        Cadastro
+                        <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="{{url_for('cadastro_cliente')}}">Cliente</a>
+                        <a href="{{url_for('cadastro')}}">Colaborador</a> 
+                        <a href="{{url_for('posto_trabalho')}}">Posto de trabalho</a>
+                        <a href="{{url_for('contrato')}}">Contratos</a>
+                    </div>
+                    <button class="dropdown-btn">
+                        Quadro de controle
+                        <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="{{url_for('quadro_cliente')}}">Quadro de clientes</a>
+                        <a href="{{url_for('quadro_colaborador')}}">Quadro de colaborador</a>
+                        <a href="{{url_for('postos_trabalho')}}">Posto de trabalho</a>
+                    </div>
+                    <a href="{{url_for('controle')}}" id="select">Controle de Presença</a>
+                    <a href="{{url_for('evento')}}">Eventos</a>
+                    <a href="{{url_for('quadro_contrato')}}">Contratos</a>
+                    <a href="{{url_for('presenca_tatico')}}">Autorização</a>
+                    <a href="{{url_for('cadastro_usuario')}}">Cadastro de Usuario</a>          
+                </nav>
+            </div>
+            <section>
+                <h1 class="titulo no-print">Controle de Presença</h1>
+                <h1 class="titulo only-print">Controle de Presença</h1>
+                <div id="cadastro"> 
+                    <form name="presenca" action="" method="POST">			
+                        <table class=no-print id="tab_cadastro" cellspacing="12" class="tabela">
+                            <tr>				
+                                <td class=no-print>Colaborador:</td>
+                                <td class=no-print><select id="select-colaborador" name="colaborador">
+                                    <option value=""></option>
+                                    {%for row in colaborador %}                             
+                                    <option value="{{row.0}}">{{row.0}}</option>                                                               
+                                    {% endfor %}                                  
+                                </select></td>
+                                <td class=no-print>Dia:</td>
+                                <td><input type="number" name="dia" id="dia" class="no-print number" placeholder="Data Presente"  pattern="[0-9]{2}" /></td>
+                            </tr>            	
+                            <tr>
+                                <td class=no-print >Presença ou Falta</td>
+                                <td>
+                                    <div class="radio no-print ">
+                                        <label><input type="radio" name="pouf" value="P"/>&nbsp;P&emsp;</label> <!--entidade que representa a tecla do espaço : &nbsp; (non-breaking space)-->
+                                        <label><input type="radio" name="pouf" value="F"/>&nbsp;F</label>  <!--&emsp; representa 4 espaços-->
+                                    </div>
+                                </td>					
+                            </tr>
+                        </table>
+                        <div class="bt-container">
+                            <!--essa parte é o codigo com flask para exibir a mensagem de confirmação de envio -->
+                            <button class=no-print type="submit" class="cadastrar" id="botao_cad">Cadastrar</button>
+                            <br>
+                          
+  
+                            <div class="concluido">
+                                {%with messages = get_flashed_messages() %}
+
+                                {%if messages%}
+        
+                                {%for message in messages%}
+        
+                                {{message}}
+        
+                                {%endfor%}
+                                {%endif%}
+                                {%endwith%}
+                            </div>           
+                        </div>
+                        <div class="table">
+                            <table>
+                                <tr id="evento">
+                                    <th rowspan="2" class="colab tab" >Colaborador</th>
+                                    <th rowspan="2" class="colab tab" >Posto de Trabalho</th>
+                                    <th rowspan="2" class="colab tab" >Cobertura</th>
+                                    <th colspan="33" class="mes tab ">{{mesaberto}}</th>
+                                    <tr class="dias">
+                                        <td>01</td>
+                                        <td>02</td>
+                                        <td>03</td>
+                                        <td>04</td>
+                                        <td>05</td>
+                                        <td>06</td>
+                                        <td>07</td>
+                                        <td>08</td>
+                                        <td>09</td>
+                                        <td>10</td>
+                                        <td>11</td>
+                                        <td>12</td>
+                                        <td>13</td>
+                                        <td>14</td>
+                                        <td>15</td>
+                                        <td>16</td>
+                                        <td>17</td>
+                                        <td>18</td>
+                                        <td>19</td>
+                                        <td>20</td>
+                                        <td>21</td>
+                                        <td>22</td>
+                                        <td>23</td>
+                                        <td>24</td>
+                                        <td>25</td>
+                                        <td>26</td>
+                                        <td>27</td>
+                                        <td>28</td>
+                                        <td>29</td>
+                                        <td>30</td>
+                                        <td>31</td>
+                                    </tr>
+                                </tr>
+                                
+                                {% for row in controle %}
+                                <tr class="dados">
+                                    <td class="colab" >{{row.1}}</td>
+                                    <td class="colab" >{{row.3}}</td>
+                                    <td class="colab" >{{row.6}}</td>
+                                    <td>{{row.7}}</td>
+                                    <td>{{row.8}}</td>
+                                    <td>{{row.9}}</td>
+                                    <td>{{row.10}}</td>
+                                    <td>{{row.11}}</td>
+                                    <td>{{row.12}}</td>
+                                    <td>{{row.13}}</td>
+                                    <td>{{row.14}}</td>
+                                    <td>{{row.15}}</td>
+                                    <td>{{row.16}}</td>
+                                    <td>{{row.17}}</td>
+                                    <td>{{row.18}}</td>
+                                    <td>{{row.19}}</td>
+                                    <td>{{row.20}}</td>
+                                    <td>{{row.21}}</td>
+                                    <td>{{row.22}}</td>
+                                    <td>{{row.23}}</td>
+                                    <td>{{row.24}}</td>
+                                    <td>{{row.25}}</td>
+                                    <td>{{row.26}}</td>
+                                    <td>{{row.27}}</td>
+                                    <td>{{row.28}}</td>
+                                    <td>{{row.29}}</td>
+                                    <td>{{row.30}}</td>
+                                    <td>{{row.31}}</td>
+                                    <td>{{row.32}}</td>
+                                    <td>{{row.33}}</td>
+                                    <td>{{row.34}}</td>
+                                    <td>{{row.35}}</td>
+                                    <td>{{row.36}}</td>
+                                    <td>{{row.37}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div> 
+    </body>
+</html>

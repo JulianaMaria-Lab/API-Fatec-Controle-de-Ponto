@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quadro de Contratos</title>
+    <link rel="shortcut icon" href="./img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='stylesheets/styleQuadroContrato.css') }}">
+    <script src="{{ url_for('static', filename='script/script.js') }}" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../static/img/logo.svg" alt="Logo">
+            <p>Logo</p>
+        </div>
+        <div class="login">
+
+            <div class="user">
+                <p>{{session.username}}</p>
+                <p class="user-perfil">{{session.nivel}}</p>
+            </div>
+            <a href="{{url_for('logout')}}"><button class="sair">Sair</button></a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="menu">
+            <nav>
+                <a href="{{url_for('index')}}">Home</a>
+                <button class="dropdown-btn">
+                    Cadastro
+                    <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                </button>
+                <div class="dropdown-container">
+                    <a href="{{url_for('cadastro_cliente')}}">Cliente</a>
+                    <a href="{{url_for('cadastro')}}">Colaborador</a>
+                    <a href="{{url_for('posto_trabalho')}}">Posto de trabalho</a>
+                    <a href="{{url_for('contrato')}}">Contratos</a>
+                </div>
+                <button class="dropdown-btn">
+                    Quadro de controle
+                    <img src="../static/img/seta-menuFechado.svg" alt="seta pra cima">
+                </button>
+                <div class="dropdown-container">
+                    <a href="{{url_for('quadro_cliente')}}">Quadro de clientes</a>
+                    <a href="{{url_for('quadro_colaborador')}}">Quadro de colaborador</a>
+                    <a href="{{url_for('postos_trabalho')}}">Posto de trabalho</a>
+                </div>
+                <a href="{{url_for('controle')}}">Controle de Presença</a>
+                <a href="{{url_for('evento')}}">Eventos</a>
+                <a href="{{url_for('quadro_contrato')}}" id="select">Contratos</a>
+                <a href="{{url_for('presenca_tatico')}}">Autorização</a>
+                <a href="{{url_for('cadastro_usuario')}}">Cadastro de Usuario</a>
+            </nav>
+        </div>
+
+        <section>
+            <h1 class="titulo">Quadro de Contratos</h1>
+            <div id="quadro_contratos">
+                <div class="table">
+                    <table>
+                        <tr id="contrato">
+                            <th class="colab tab">Número Contrato</th>
+                            <th class="colab tab">Razão Social</th>
+                            <th class="colab tab">CNPJ</th>
+                            <th class="colab tab">Postos de Trabalho</th>
+                            <th class="colab tab">Escala</th>
+                            <th class="colab tab">Valor</th>
+                            <th class="colab tab">Inicio do Contrato</th>
+                            <th class="colab tab">Download</th>
+                            
+                        </tr>
+                        {%for row in quadro_contrato %}
+                        <tr class="dados">
+                            <td class="colab tab">{{row.0}}</td>
+                            <td class="colab tab">{{row.1}}</td>
+                            <td class="colab tab">{{row.2}}</td>
+                            <td class="colab tab">{{row.3}}</td>
+                            <td class="colab tab">{{row.4}}</td>
+                            <td class="colab tab">{{row.5}}</td>
+                            <td class="colab tab">{{row.6}}</td>
+                            <td class="colab tab">
+                                <a class="icon" href="{{url_for('download_by_id', id=row.0)}}">
+                                    <img width="32" height="32" src="../static/img/download-pdf.png">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>

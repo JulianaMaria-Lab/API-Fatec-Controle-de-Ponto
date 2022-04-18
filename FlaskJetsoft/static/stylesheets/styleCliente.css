@@ -1,0 +1,86 @@
+/* //////////////// cadastro de clientes ////////////// */
+
+/* título */
+.titulo {
+  font-weight: bold;
+  text-align: center;
+  font-size: 28px;
+
+  margin: 70px 0px 80px;
+}
+body {
+  outline: none;
+  font-family: sans-serif;
+}
+/* campos input do formulário */
+#razao_social,
+#nome_fantasia,
+#cnpj,
+#endereco,
+#numero,
+#bairro,
+#cidade,
+#estado_uf,
+#cep,
+#contato,
+#email,
+#data_admissao {
+  height: 35px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e1e1e1;
+  padding: 4px;
+}
+
+/* botão - cadastrar */
+#botao_cad {
+  width: 150px;
+  height: 30px;
+  background-color: #364e73;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+#botao_cad:hover {
+  background: #22334d;
+  box-shadow: #22334d;
+  text-shadow: none;
+}
+
+/* tabela do formulário */
+.bt-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0px 90px;
+}
+#tab_cadastro {
+  display: flex;
+  justify-content: center;
+}
+
+.sair {
+  padding: 10px 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  
+}
+
+.sair {
+  background-color:black;
+  color: white;
+  border: none;
+}
+
+.sair:hover {
+  background-color: red;
+  color: white;
+}
+
